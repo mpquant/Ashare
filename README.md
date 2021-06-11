@@ -40,7 +40,7 @@ print('贵州茅台60分钟线\n',df)
 
 
 
-```python
+```
 #上证指数日线行情----------------------------------------------------
               open    close     high      low       volume
 2021-06-07  3597.14  3599.54  3600.38  3581.90  303718677.0
@@ -75,8 +75,9 @@ df=get_price('000001.XSHG',frequency='1d',count=120)      #默认获取今天往
 print('上证指数日线行情\n',df.tail(5))
 
 #-------有数据了，下面开始正题 -------------
+# 也支持pd序列，列表,例如 CLOSE=df.close ,   CLOSE=list(df.close) 都是一样
 CLOSE=df.close;         OPEN=df.open           #基础数据定义，只要传入的是序列都可以   
-HIGH=df.high;           LOW=df.low             #也支持pd序列，列表,例如 CLOSE=df.close ,   CLOSE=list(df.close) 都是一样
+HIGH=df.high;           LOW=df.low             
 
 MA5=MA(CLOSE,5)                                #获取5日均线序列
 MA10=MA(CLOSE,10)                              #获取10日均线序列
