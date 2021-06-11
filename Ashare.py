@@ -1,5 +1,5 @@
-#-*- coding:utf-8 -*-    ---------------Ashare 股票行情数据 ----------------------
-import json,requests,datetime;      import pandas as pd
+#-*- coding:utf-8 -*-    ---------------Ashare 股票行情数据( https://github.com/mpquant/Ashare ) 
+import json,requests,datetime;      import pandas as pd  #
 
 def get_price_day_tx(code, end_date='', count=10, frequency='1d'):     #日线获取  
     if end_date:  end_date=end_date.strftime('%Y-%m-%d') if isinstance(end_date,datetime.date) else end_date.split(' ')[0]
@@ -39,4 +39,4 @@ if __name__ == '__main__':
     df=get_price('000001.XSHG',frequency='15m',count=10)  #支持'1m','5m','15m','30m','60m'
     print('上证指数分钟线\n',df)
 
-
+# Ashare 股票行情数据( https://github.com/mpquant/Ashare ) 
