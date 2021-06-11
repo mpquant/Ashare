@@ -72,7 +72,7 @@ from  MyTT import *            #myTT麦语言工具函数指标库  https://gith
 # 证券代码兼容多种格式 通达信，同花顺，聚宽
 # sh000001 (000001.XSHG)    sz399006 (399006.XSHE)   sh600519 ( 600519.XSHG ) 
 
-df=get_price('000001.XSHG',frequency='1d',count=120)      #默认获取今天往前5天的日线行情
+df=get_price('000001.XSHG',frequency='1d',count=120)      #获取今天往前120天的日线行情
 print('上证指数日线行情\n',df.tail(5))
 
 #-------有数据了，下面开始正题 -------------
