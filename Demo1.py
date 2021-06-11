@@ -1,4 +1,4 @@
-#A股票行情数据获取演示 
+#A股票行情数据获取演示   https://github.com/mpquant/Ashare
 from  Ashare import *
     
 # 证券代码兼容多种格式 通达信，同花顺，聚宽
