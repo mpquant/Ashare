@@ -90,9 +90,7 @@ plt.figure(figsize=(15,8))
 plt.plot(CLOSE,label='SHZS');    plt.plot(up,label='UP');           #画图显示 
 plt.plot(mid,label='MID');       plt.plot(lower,label='LOW');
 plt.plot(MA10,label='MA10',linewidth=0.5,alpha=0.7);
-plt.legend();         plt.grid(linewidth=0.5,alpha=0.7);    plt.gcf().autofmt_xdate(rotation=45);
-plt.gca().xaxis.set_major_locator(MultipleLocator(len(CLOSE)/30))    #日期最多显示30个
-plt.title('SH-INDEX   &   BOLL SHOW',fontsize=20);   plt.show()
+plt.show()
 ```
 
 <div  align="center"> <img src="/img/sh_boll.png" width = "960" height = "400" alt="boll" /> </div>
