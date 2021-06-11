@@ -93,7 +93,7 @@ plt.plot(MA10,label='MA10',linewidth=0.5,alpha=0.7);
 plt.show()
 ```
 
-<div  align="center"> <img src="/img/sh_boll.png" width = "960" height = "400" alt="boll" /> </div>
+<div  align="center"> <img src="/img/sh_boll.png" width = "960" height = "480" alt="boll" /> </div>
 
 
 ----------------------------------------------------
