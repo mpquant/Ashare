@@ -1,6 +1,6 @@
 #股市行情数据获取和作图 -2
-from  Ashare import *          #股票数据库
-from  MyTT import *            #myTT麦语言工具函数指标库
+from  Ashare import *          #股票数据库    https://github.com/mpquant/Ashare
+from  MyTT import *            #myTT麦语言工具函数指标库  https://github.com/mpquant/MyTT
     
 # 证券代码兼容多种格式 通达信，同花顺，聚宽
 # sh000001 (000001.XSHG)    sz399006 (399006.XSHE)   sh600519 ( 600519.XSHG ) 
