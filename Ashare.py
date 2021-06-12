@@ -24,8 +24,8 @@ def get_price_min_tx(code, end_date=None, count=10, frequency='1d'):    #分钟�
     return df
 
 
-def get_price(code, end_date='',count=10, frequency='1d', fields=[]):         #主功能函数包装
-    xcode= code.replace('.XSHG','').replace('.XSHE','')                       #证券代码编码兼容 
+def get_price(code, end_date='',count=10, frequency='1d', fields=[] , href=1):         #主功能函数包装
+    xcode= code.replace('.XSHG','').replace('.XSHE','')                                #证券代码编码兼容 
     xcode='sh'+xcode if ('XSHG' in code)  else  'sz'+xcode  if ('XSHE' in code)  else code    
     if  frequency in '1d':
          return get_price_day_tx(xcode,end_date=end_date,count=count,frequency='1d') 
