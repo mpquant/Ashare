@@ -8,8 +8,8 @@ def get_price_day_tx(code, end_date='', count=10, frequency='1d'):     #日线�
     URL=f'http://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param={code},day,,{end_date},{count},qfq'     
     st= json.loads(requests.get(URL).content)   
     buf=st['data'][code]['qfqday'] if 'qfqday' in st['data'][code] else st['data'][code]['day']
-    df=pd.DataFrame(buf,columns=['time','open','close','high','low','volume'],dtype='float')     
-    df.set_index(['time'], inplace=True);   df.index.name=''          #处理索引 
+    df=pd.DataFrame(buf,columns=['time','open','close','high','low','volume'],dtype='float')         
+    df.time=pd.to_datetime(df.time);   df.set_index(['time'], inplace=True);   df.index.name=''          #处理索引 
     return df
 
 #腾讯分钟线
