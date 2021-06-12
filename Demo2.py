@@ -9,8 +9,8 @@ df=get_price('000001.XSHG',frequency='1d',count=120)      #默认获取今天往
 print('上证指数日线行情\n',df.tail(5))
 
 #-------有数据了，下面开始正题 -------------
-CLOSE=df.close;         OPEN=df.open           #基础数据定义，只要传入的是序列都可以  Close=df.close.values 
-HIGH=df.high;           LOW=df.low             #也支持pd序列，列表,例如 CLOSE=df.close ,   CLOSE=list(df.close) 都是一样
+CLOSE=df.close.values;         OPEN=df.open.values           #基础数据定义，只要传入的是序列都可以  Close=df.close.values 
+HIGH=df.high.values;           LOW=df.low.values             #例如  CLOSE=list(df.close) 都是一样
 
 MA5=MA(CLOSE,5)                                #获取5日均线序列
 MA10=MA(CLOSE,10)                              #获取10日均线序列
