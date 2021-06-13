@@ -43,8 +43,8 @@ def get_price_sina(code, end_date='', count=10, frequency='60m'):    #新浪全�
     if (end_date!='') & (frequency in ['240m','1200m','7200m']): return df[df.index<=end_date][-mcount:]   #日线带结束时间先返回              
     return df
 
-def get_price(code, end_date='',count=10, frequency='1d', fields=[]):        #对外公布的唯一函数  
-    xcode= code.replace('.XSHG','').replace('.XSHE','')         #证券代码编码兼容 
+def get_price(code, end_date='',count=10, frequency='1d', fields=[]):        #对外暴露只有唯一函数，这样对用户才是最友好的  
+    xcode= code.replace('.XSHG','').replace('.XSHE','')                      #证券代码编码兼容处理 
     xcode='sh'+xcode if ('XSHG' in code)  else  'sz'+xcode  if ('XSHE' in code)  else code     
 
     if  frequency in ['1d','1w','1M']:   #1d日线  1w周线  1M月线
