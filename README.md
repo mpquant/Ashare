@@ -111,8 +111,6 @@ plt.show()
 
 * [backtest数字货币历史回测服务器,高速内存数据库实现](https://github.com/mpquant/huobi_backtest)
 
-* [ths_trade同花顺自动化交易股票下单接口API,量化框架](https://github.com/mpquant/ths_trade)
-
 * [Ashare最简股票行情数据接口API,A股行情完全开源免费](https://github.com/mpquant/Ashare)
 
 
