@@ -35,7 +35,7 @@ def get_price_sina(code, end_date='', count=10, frequency='60m'):    #新浪全�
         end_date=pd.to_datetime(end_date) if not isinstance(end_date,datetime.date) else end_date    #转换成datetime
         unit=4 if frequency=='1200m' else 29 if frequency=='7200m' else 1    #4,29多几个数据不影响速度
         count=count+(datetime.datetime.now()-end_date).days//unit            #结束时间到今天有多少天自然日(肯定 >交易日)        
-        print(code,end_date,count)    
+        #print(code,end_date,count)    
     URL=f'http://money.finance.sina.com.cn/quotes_service/api/json_v2.php/CN_MarketData.getKLineData?symbol={code}&scale={ts}&ma=5&datalen={count}' 
     dstr= json.loads(requests.get(URL).content);       
     df=pd.DataFrame(dstr,columns=['day','open','high','low','close','volume'],dtype='float') 
