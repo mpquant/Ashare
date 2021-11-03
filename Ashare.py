@@ -2,7 +2,7 @@
 import json,requests,datetime;      import pandas as pd  #
 
 #腾讯日线
-def get_price_day_tx(code, end_date='', count=10, frequency='1d'):     #日线获取  
+def _get_price_day_tx(code, end_date='', count=10, frequency='1d'):     #日线获取  
     unit='week' if frequency in '1w' else 'month' if frequency in '1M' else 'day'     #判断日线，周线，月线
     if end_date:  end_date=end_date.strftime('%Y-%m-%d') if isinstance(end_date,datetime.date) else end_date.split(' ')[0]
     end_date='' if end_date==datetime.datetime.now().strftime('%Y-%m-%d') else end_date   #如果日期今天就变成空    
@@ -14,7 +14,7 @@ def get_price_day_tx(code, end_date='', count=10, frequency='1d'):     #日线�
     return df
 
 #腾讯分钟线
-def get_price_min_tx(code, end_date=None, count=10, frequency='1d'):    #分钟线获取 
+def _get_price_min_tx(code, end_date=None, count=10, frequency='1d'):    #分钟线获取 
     ts=int(frequency[:-1]) if frequency[:-1].isdigit() else 1           #解析K线周期数
     if end_date: end_date=end_date.strftime('%Y-%m-%d') if isinstance(end_date,datetime.date) else end_date.split(' ')[0]        
     URL=f'http://ifzq.gtimg.cn/appstock/app/kline/mkline?param={code},m{ts},,{count}' 
@@ -28,7 +28,7 @@ def get_price_min_tx(code, end_date=None, count=10, frequency='1d'):    #分钟�
 
 
 #sina新浪全周期获取函数，分钟线 5m,15m,30m,60m  日线1d=240m   周线1w=1200m  1月=7200m
-def get_price_sina(code, end_date='', count=10, frequency='60m'):    #新浪全周期获取函数    
+def _get_price_sina(code, end_date='', count=10, frequency='60m'):    #新浪全周期获取函数    
     frequency=frequency.replace('1d','240m').replace('1w','1200m').replace('1M','7200m');   mcount=count
     ts=int(frequency[:-1]) if frequency[:-1].isdigit() else 1       #解析K线周期数
     if (end_date!='') & (frequency in ['240m','1200m','7200m']): 
@@ -48,13 +48,13 @@ def get_price(code, end_date='',count=10, frequency='1d', fields=[]):        #�
     xcode='sh'+xcode if ('XSHG' in code)  else  'sz'+xcode  if ('XSHE' in code)  else code     
 
     if  frequency in ['1d','1w','1M']:   #1d日线  1w周线  1M月线
-         try:    return get_price_sina( xcode, end_date=end_date,count=count,frequency=frequency)   #主力
-         except: return get_price_day_tx(xcode,end_date=end_date,count=count,frequency=frequency)   #备用                    
+         try:    return _get_price_sina( xcode, end_date=end_date,count=count,frequency=frequency)   #主力
+         except: return _get_price_day_tx(xcode,end_date=end_date,count=count,frequency=frequency)   #备用                    
     
     if  frequency in ['1m','5m','15m','30m','60m']:  #分钟线 ,1m只有腾讯接口  5分钟5m   60分钟60m
-         if frequency in '1m': return get_price_min_tx(xcode,end_date=end_date,count=count,frequency=frequency)
-         try:    return get_price_sina(  xcode,end_date=end_date,count=count,frequency=frequency)   #主力   
-         except: return get_price_min_tx(xcode,end_date=end_date,count=count,frequency=frequency)   #备用
+         if frequency in '1m': return _get_price_min_tx(xcode,end_date=end_date,count=count,frequency=frequency)
+         try:    return _get_price_sina(  xcode,end_date=end_date,count=count,frequency=frequency)   #主力   
+         except: return _get_price_min_tx(xcode,end_date=end_date,count=count,frequency=frequency)   #备用
         
 if __name__ == '__main__':    
     df=get_price('sh000001',frequency='1d',count=10)      #支持'1d'日, '1w'周, '1M'月  
