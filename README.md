@@ -107,10 +107,6 @@ plt.show()
 
 * [Hb_Spark数字货币高速免费实时行情服务器,量化必备](https://github.com/mpquant/huobi_intf)
 
-* [hb_trade火币网交易接口API最简封装,提供现货期货合约](https://github.com/mpquant/huobi_trade)
-
-* [backtest数字货币历史回测服务器,高速内存数据库实现](https://github.com/mpquant/huobi_backtest)
-
 * [Ashare最简股票行情数据接口API,A股行情完全开源免费](https://github.com/mpquant/Ashare)
 
 
@@ -121,5 +117,5 @@ plt.show()
 
 ![加入群聊](https://github.com/mpquant/Ashare/blob/main/img/qrcode.png) 
 
-> #### 股市程序化交易大群,数字货币量化交易探讨, 圈内大咖量化策略分享
+> #### 股市程序化交易大群, 圈内大咖量化策略分享
 > #### 全是干货，无闲聊 ，物以类聚,人以群分，一起感受思维碰撞的力量!
