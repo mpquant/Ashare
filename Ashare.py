@@ -9,8 +9,10 @@ def get_price_day_tx(code, end_date='', count=10, frequency='1d'):     #日线�
     URL=f'http://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param={code},{unit},,{end_date},{count},qfq'     
     st= json.loads(requests.get(URL).content);    ms='qfq'+unit;      stk=st['data'][code]   
     buf=stk[ms] if ms in stk else stk[unit]       #指数返回不是qfqday,是day
-    df=pd.DataFrame(buf,columns=['time','open','close','high','low','volume'],dtype='float')     
-    df.time=pd.to_datetime(df.time);    df.set_index(['time'], inplace=True);   df.index.name=''          #处理索引 
+    df = pd.DataFrame(buf, columns=['time', 'open', 'close', 'high', 'low', 'volume'])
+    for col in ['open', 'close', 'high', 'low', 'volume']:
+        df[col] = df[col].astype(float)     
+    df['time'] = pd.to_datetime(df['time']);    df.set_index(['time'], inplace=True);   df.index.name=''          #处理索引 
     return df
 
 #腾讯分钟线
@@ -39,11 +41,12 @@ def get_price_sina(code, end_date='', count=10, frequency='60m'):    #新浪全�
     URL=f'http://money.finance.sina.com.cn/quotes_service/api/json_v2.php/CN_MarketData.getKLineData?symbol={code}&scale={ts}&ma=5&datalen={count}' 
     dstr= json.loads(requests.get(URL).content);       
     #df=pd.DataFrame(dstr,columns=['day','open','high','low','close','volume'],dtype='float') 
-    df= pd.DataFrame(dstr,columns=['day','open','high','low','close','volume'])
-    df['open'] = df['open'].astype(float); df['high'] = df['high'].astype(float);                          #转换数据类型
-    df['low'] = df['low'].astype(float);   df['close'] = df['close'].astype(float);  df['volume'] = df['volume'].astype(float)    
+    df= pd.DataFrame(dstr,columns=['day','open','high','low','close','volume'])                     
+    for col in ['open', 'high', 'low', 'close', 'volume']:  #转换数据类型
+        df[col] = df[col].astype(float)  
     df.day=pd.to_datetime(df.day);    df.set_index(['day'], inplace=True);     df.index.name=''            #处理索引                 
-    if (end_date!='') & (frequency in ['240m','1200m','7200m']): return df[df.index<=end_date][-mcount:]   #日线带结束时间先返回              
+    if end_date and frequency in ['240m', '1200m', '7200m']:
+        return df[df.index <= end_date][-mcount:]
     return df
 
 def get_price(code, end_date='',count=10, frequency='1d', fields=[]):        #对外暴露只有唯一函数，这样对用户才是最友好的  
