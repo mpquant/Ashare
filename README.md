@@ -107,10 +107,6 @@ plt.show()
 
 * [Ashare最简股票行情数据接口API,A股行情完全开源免费](https://github.com/mpquant/Ashare)
 
-
-### 量化工具
-* 股市量化工具 行情系统软件开发 通达信同花顺公式开发 python量化系统开发
-
 ----------------------------------------------------
 
 ![加入群聊](https://github.com/mpquant/Ashare/blob/main/img/qrcode.png) 
