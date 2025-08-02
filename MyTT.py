@@ -39,10 +39,8 @@ def LLV(S,N):                           # LLV(C, 5)  # 最近5天收盘最低价
 def EMA(S,N):         #指数移动平均,为了精度 S>4*N  EMA至少需要120周期       
     return pd.Series(S).ewm(span=N, adjust=False).mean().values    
 
-def SMA(S, N, M=1):
-    S, sma = np.asarray(S, float), np.full_like(S, np.nan)
-    sma[N-1:] = (np.concatenate([[S[:N].mean()], (M*S[N:] + (N-M)*sma[N-1:-1])/N]))
-    return sma
+def SMA(S, N, M=1):       #中国式的SMA,至少需要120周期才精确 (雪球180周期)    alpha=1/(1+com)    
+    return pd.Series(S).ewm(alpha=M/N,adjust=False).mean().values           #com=N-M/M
 
 def AVEDEV(S,N):      #平均绝对偏差  (序列与其平均值的绝对差的平均值)   
     avedev=pd.Series(S).rolling(N).apply(lambda x: (np.abs(x - x.mean())).mean())    
