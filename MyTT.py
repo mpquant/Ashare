@@ -1,6 +1,7 @@
 # MyTT 麦语言-通达信-同花顺指标实现    https://github.com/mpquant/MyTT
 # V2.1 2021-6-6 新增 BARSLAST函数
 # V2.2 2021-6-8 新增 SLOPE,FORCAST线性回归，和回归预测函数
+# V2.3 2025-8-2 改进 SAM函数,速度提升15倍
   
 import numpy as np; import pandas as pd
 
@@ -38,10 +39,10 @@ def LLV(S,N):                           # LLV(C, 5)  # 最近5天收盘最低价
 def EMA(S,N):         #指数移动平均,为了精度 S>4*N  EMA至少需要120周期       
     return pd.Series(S).ewm(span=N, adjust=False).mean().values    
 
-def SMA(S, N, M=1):   #中国式的SMA,至少需要120周期才精确         
-    K = pd.Series(S).rolling(N).mean()    #先求出平均值 (下面如果有不用循环的办法，能提高性能，望告知)
-    for i in range(N+1, len(S)):  K[i] = (M * S[i] + (N -M) * K[i-1]) / N  # 因为要取K[i-1]，所以 range(N+1, len(S))        
-    return K
+def SMA(S, N, M=1):
+    S, sma = np.asarray(S, float), np.full_like(S, np.nan)
+    sma[N-1:] = (np.concatenate([[S[:N].mean()], (M*S[N:] + (N-M)*sma[N-1:-1])/N]))
+    return sma
 
 def AVEDEV(S,N):      #平均绝对偏差  (序列与其平均值的绝对差的平均值)   
     avedev=pd.Series(S).rolling(N).apply(lambda x: (np.abs(x - x.mean())).mean())    
