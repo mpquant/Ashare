@@ -9,6 +9,7 @@ def get_price_day_tx(code, end_date='', count=10, frequency='1d'):     #日线�
     URL=f'http://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param={code},{unit},,{end_date},{count},qfq'     
     st= json.loads(requests.get(URL).content);    ms='qfq'+unit;      stk=st['data'][code]   
     buf=stk[ms] if ms in stk else stk[unit]       #指数返回不是qfqday,是day
+    buf = [item[:6] for item in buf] # 去掉第七行cqr数据(例如hk00002)
     df=pd.DataFrame(buf,columns=['time','open','close','high','low','volume'],dtype='float')     
     df.time=pd.to_datetime(df.time);    df.set_index(['time'], inplace=True);   df.index.name=''          #处理索引 
     return df
